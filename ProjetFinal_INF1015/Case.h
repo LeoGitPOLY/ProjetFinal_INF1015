@@ -23,6 +23,7 @@ public:
 	friend ostream& operator<< (ostream& o, const shared_ptr<Case>& ptrCase);
 	static void lienEntreCases(pair<shared_ptr<Case>, Direction> case1, pair<shared_ptr<Case>, Direction> case2);
 
+	static map<Direction, string> directionNom_;
 private:
 	void fixerCaseAdjacente(Direction direction, const shared_ptr<Case> caseAdjacente);
 	
@@ -30,5 +31,4 @@ private:
 	string description_;
 	map<Direction, shared_ptr<Case>> casesAdjacente_;
 
-	static map<Direction, string> directionNom_;
 };

@@ -6,5 +6,6 @@ class GestionAffichage
 {
 public:
 	static void afficherEtapejeu(Jeu& jeu);
+	static void gestionEntree(Jeu& jeu);
 	
 };

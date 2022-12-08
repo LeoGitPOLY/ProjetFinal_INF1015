@@ -42,9 +42,9 @@ ostream& operator<<(ostream& o, const Jeu& jeu)
 	return o;
 }
 
-shared_ptr<Case> Jeu::obtenirCaseActuelle() const
+shared_ptr<Case> Jeu::obtenirCaseDirection(Direction direction) const
 {
-	return caseActuelle_;
+	return caseActuelle_->retournerCaseDirection(direction);
 }
 
 

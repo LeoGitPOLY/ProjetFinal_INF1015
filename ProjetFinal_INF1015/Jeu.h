@@ -12,7 +12,7 @@ public:
 	~Jeu() = default;
 
 	void allerDansDirection(Direction direction);
-	shared_ptr<Case> obtenirCaseActuelle() const;
+	shared_ptr<Case> obtenirCaseDirection(Direction direction) const;
 	friend ostream& operator<< (ostream& o, const Jeu& ptrJeu);
 
 private:
