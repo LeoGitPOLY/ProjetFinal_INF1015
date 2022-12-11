@@ -1,3 +1,8 @@
+// Auteurs: Leonard Pouliot (2150965) et Kamil Maarite (2152653)
+// Date: 11 decembre 2022
+// Cours: INF1015
+// Nom de la classe: GestionAffichage.cpp
+
 #include "GestionAffichage.h"
 
 using namespace std;
@@ -5,7 +10,6 @@ using namespace std;
 void GestionAffichage::afficherEtapejeu(Jeu& jeu)
 {
 	cout << jeu;
-
 	gestionEntree(jeu);
 }
 

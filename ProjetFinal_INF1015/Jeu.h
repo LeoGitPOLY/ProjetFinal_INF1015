@@ -1,3 +1,8 @@
+// Auteurs: Leonard Pouliot (2150965) et Kamil Maarite (2152653)
+// Date: 11 decembre 2022
+// Cours: INF1015
+// Nom de la classe: Jeu.h
+
 #pragma once
 #include <iostream>
 #include "Case.h"
