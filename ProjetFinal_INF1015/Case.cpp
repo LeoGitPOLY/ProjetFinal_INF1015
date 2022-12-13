@@ -6,9 +6,9 @@
 #include "Case.h"
 
 map<Direction, string> Case::directionNom_ = { { Direction::Nord, "au nord (N)" },
-												{ Direction::Est, "a l'est (E)" },
-												{ Direction::Sud, "au sud (S)" },
-												{ Direction::Ouest, "a l'ouest (O)" } };
+											   { Direction::Est, "a l'est (E)" },
+											   { Direction::Sud, "au sud (S)" },
+											   { Direction::Ouest, "a l'ouest (O)" } };
 
 
 Case::Case(string nom, string description) : nom_(nom), description_(description)

@@ -13,6 +13,7 @@ void GestionAffichage::afficherEtapejeu(Jeu& jeu)
 	gestionEntree(jeu);
 }
 
+
 void GestionAffichage::gestionEntree(Jeu& jeu)
 {
 	string entree;
