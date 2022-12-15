@@ -11,16 +11,16 @@
 int main()
 {
 	Jeu jeu;
-	int* r = new int(2);
+
 	cout << ">>>>> INF1015 DUNGEON CRAWLER <<<<<" << endl;
 	cout << "  Leonard Pouliot & Kamil Maarite\n" << endl;
 
-	int i = 0;
+	//int i = 0; Uniquement pour tester quand le progarmme termine
 	while (true) {
-		if (i == 3)
+		/*if (i == 3)
 			break;
 		else
-			i++;
+			i++;*/
 
 		GestionAffichage::afficherEtapejeu(jeu);
 	}
