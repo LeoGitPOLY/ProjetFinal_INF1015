@@ -67,7 +67,7 @@ ostream& operator<<(ostream& o, const shared_ptr<Case>& ptrCase)
 	if (ptrCase->objets_.size() != 0)
 		o << "Vous remarquez: " << endl;
 
-	for (auto& objet : ptrCase->objets_)
+	for (auto& objet : ptrCase->objets_) // Kamil: il faudrait pas mettre ce for dans le if? Parce si objets_ est vide, il va quand meme faire ce for
 		o << objet;
 
 	o << "Les pieces adjacentes: " << endl;

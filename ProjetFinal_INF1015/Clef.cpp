@@ -4,7 +4,7 @@
 // Cours: INF1015
 // Nom de la classe: Clef.cpp
 
-Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet(nom)
+Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet(nom) // Kamil: j'aurais utilise une lsite d'initialisation
 {
 	caseOuvrir_ = caseOuvrir;
 	caseUtiliser_ = caseUtiliser;

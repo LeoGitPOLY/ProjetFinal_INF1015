@@ -2,6 +2,7 @@
 out/
 include/
 bibliotheque_cours/
+SolutionDirectory/
 x64/
 *.coverage
 *.vcxproj

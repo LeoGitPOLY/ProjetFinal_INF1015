@@ -4,6 +4,7 @@
 // Nom de la classe: GestionAffichage.cpp
 
 #include "GestionAffichage.h"
+#include <functional>
 
 using namespace std;
 

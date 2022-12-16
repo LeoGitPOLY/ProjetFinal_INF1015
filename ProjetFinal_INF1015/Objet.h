@@ -5,8 +5,9 @@
 
 #pragma once
 #include <iostream>
+#include <vector>
 
-class Case; //Foward decleration: pour eviter les references circuraires
+class Case; //Foward decleration: pour eviter les references circulaires
 
 using namespace std;
 
@@ -27,4 +28,5 @@ private:
 	string nom_;
 	string descriptionRegarder_;
 	string descriptionUtiliser_;
+	vector<string> motsImportants_;
 };

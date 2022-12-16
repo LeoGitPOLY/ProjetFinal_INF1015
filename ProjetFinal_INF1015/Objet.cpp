@@ -9,7 +9,7 @@ Objet::Objet(string nom) :nom_(nom)
 {
 }
 
-void Objet::creerDescription(string descriptionRegarder, string descriptionUtiliser)
+void Objet::creerDescription(string descriptionRegarder, string descriptionUtiliser) // Kamil: j'aurais fait ca dans une liste d'initialisation
 {
 	descriptionRegarder_ = descriptionRegarder;
 	descriptionUtiliser_ = descriptionUtiliser;
@@ -33,6 +33,6 @@ void Objet::utiliser(shared_ptr<Case> caseActuelle)
 
 ostream& operator<<(ostream& o, const unique_ptr<Objet>& ptrObjet)
 {
-	o << "$ " << ptrObjet->nom_ << endl;
+	o << "    " << ptrObjet->nom_ << endl;
 	return o;
 }
