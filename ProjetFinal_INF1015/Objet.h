@@ -18,6 +18,8 @@ public:
 	virtual ~Objet() = default;
 	
 	void creerDescription(string descriptionRegarder, string descriptionUtiliser);
+	void ajouterMotsImportant(vector<string> mots);
+	vector<string>& avoirMotsImportant();
 
 	virtual bool prendre() const;
 	virtual void regarder() const;
@@ -25,8 +27,9 @@ public:
 
 	friend ostream& operator<< (ostream& o, const unique_ptr<Objet>& ptrObjet);
 private:
+	vector<string> motsImportants_;
+	
 	string nom_;
 	string descriptionRegarder_;
 	string descriptionUtiliser_;
-	vector<string> motsImportants_;
 };

@@ -53,9 +53,12 @@ void Jeu::creationJeu()
 
 	// CREATION DES OBJECTS
 	unique_ptr<Objet> chandelier = make_unique<Objet>("Chandelier");
-	chandelier->creerDescription("des Regarder", "des utiliser");
+	chandelier->creerDescription("des. Regarder", "des. utiliser");
+	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
-	unique_ptr<Objet> clef = make_unique<Clef>("Clef Rouge"s, pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
+	unique_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
+	clef->creerDescription("des. Regarder", "des. utiliser");
+	clef->ajouterMotsImportant({ "clef", "rouge"});
 
 	entree->retournerObjets().push_back(move(chandelier));
 	salon->retournerObjets().push_back(move(clef));
@@ -67,6 +70,16 @@ void Jeu::creationJeu()
 shared_ptr<Case> Jeu::obtenirCaseDirection(Direction direction) const
 {
 	return caseActuelle_->retournerCaseDirection(direction);
+}
+
+vector<unique_ptr<Objet>>& Jeu::obtenirListeObjetJeu()
+{
+	return objets_;
+}
+
+vector<unique_ptr<Objet>>& Jeu::obtenirListeObjetCase()
+{
+	return caseActuelle_->retournerObjets();
 }
 
 

@@ -15,6 +15,16 @@ void Objet::creerDescription(string descriptionRegarder, string descriptionUtili
 	descriptionUtiliser_ = descriptionUtiliser;
 }
 
+void Objet::ajouterMotsImportant(vector<string> mots)
+{
+	motsImportants_.insert(motsImportants_.end(), mots.begin(), mots.end());
+}
+
+vector<string>& Objet::avoirMotsImportant()
+{
+	return motsImportants_;
+}
+
 bool Objet::prendre() const
 {
 	cout << "Il est impossible de prendre: " << nom_ << endl;

@@ -17,12 +17,14 @@ void GestionAffichage::afficherEtapejeu(Jeu& jeu)
 
 void GestionAffichage::gestionEntree(Jeu& jeu)
 {
-	string entree;
-	cout << ">";
-	cin >> entree;
+	string CommandeEntree;
+	string objetEntree;
 
-	if (entree == "N" || entree == "S" || entree == "E" || entree == "O") {
-		Direction direction = static_cast<Direction>(entree[0]);
+	cout << ">";
+	cin >> CommandeEntree >> objetEntree;
+
+	if (CommandeEntree == "N" || CommandeEntree == "S" || CommandeEntree == "E" || CommandeEntree == "O") {
+		Direction direction = static_cast<Direction>(CommandeEntree[0]);
 
 		if (jeu.obtenirCaseDirection(direction) != nullptr) {
 			jeu.allerDansDirection(direction);
@@ -33,11 +35,48 @@ void GestionAffichage::gestionEntree(Jeu& jeu)
 			gestionEntree(jeu);
 		}
 	}
-	else if (entree == "look") {
-		afficherEtapejeu(jeu);
+	else if (CommandeEntree == "U") { //Leo: En attendant que la bonne maniere sois fait, pour tester
+		utiliserObjet(jeu, objetEntree);
+	}
+	else if (CommandeEntree == "P") { //Leo: En attendant que la bonne maniere sois fait, pour tester
+		prendreObjet(jeu, objetEntree);
+	}
+	else if (CommandeEntree == "R") { //Leo: En attendant que la bonne maniere sois fait, pour tester
+		regarderObjet(jeu, objetEntree);
 	}
 	else {
 		cout << "Commande inconnue\n" << endl;
 		gestionEntree(jeu);
 	}
+}
+
+void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
+{
+	vector<unique_ptr<Objet>>& objets_ = jeu.obtenirListeObjetCase();
+	
+	for (auto& objet : objets_) {
+		if (verificationCorrespondance(*objet, objetCommande))
+			bool estPrenable = objet->prendre();
+	}
+	
+}
+
+void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
+{
+}
+
+void GestionAffichage::regarderObjet(Jeu& jeu, string objetCommande)
+{
+}
+
+bool GestionAffichage::verificationCorrespondance(Objet& objet, string objetCommande)
+{
+	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
+	// Ou quelque chose comme ca, non?
+	for (auto& mot : objet.avoirMotsImportant()) {
+		if (mot == objetCommande)
+			return true;
+	}
+	cout << "Aucun objet nommee comme ca! \n" << endl;
+	return false;
 }

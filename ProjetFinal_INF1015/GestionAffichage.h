@@ -6,15 +6,17 @@
 #pragma once
 #include <iostream>
 #include "Jeu.h"
-#include "Objet.h"
 
 class GestionAffichage
 {
 public:
 	static void afficherEtapejeu(Jeu& jeu);
 	static void gestionEntree(Jeu& jeu);
-
-private:
-	unique_ptr<Objet> objetSelectionne_;
 	
+private:
+	static void prendreObjet(Jeu& jeu, string objetCommande);
+	static void regarderObjet(Jeu& jeu, string objetCommande);
+	static void utiliserObjet(Jeu& jeu, string objetCommande);
+
+	static bool verificationCorrespondance(Objet& objet, string objetCommande);
 };
