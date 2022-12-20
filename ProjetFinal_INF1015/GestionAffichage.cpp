@@ -52,13 +52,14 @@ void GestionAffichage::gestionEntree(Jeu& jeu)
 
 void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
 {
-	vector<unique_ptr<Objet>>& objets_ = jeu.obtenirListeObjetCase();
-	
-	for (auto& objet : objets_) {
-		if (verificationCorrespondance(*objet, objetCommande))
-			bool estPrenable = objet->prendre();
+	vector<shared_ptr<Objet>> objets = jeu.obtenirListeObjetCase();
+
+	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
+		bool estPrenable = objet->prendre();
+		
+		if (estPrenable)
+			jeu.prendreObjet(objet);
 	}
-	
 }
 
 void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
@@ -69,14 +70,16 @@ void GestionAffichage::regarderObjet(Jeu& jeu, string objetCommande)
 {
 }
 
-bool GestionAffichage::verificationCorrespondance(Objet& objet, string objetCommande)
+shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, string objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
 	// Ou quelque chose comme ca, non?
-	for (auto& mot : objet.avoirMotsImportant()) {
-		if (mot == objetCommande)
-			return true;
+	for (shared_ptr<Objet> objet : objets) {
+		for (auto& mot : objet->avoirMotsImportant()) {
+			if (mot == objetCommande)
+				return objet;
+		}
 	}
 	cout << "Aucun objet nommee comme ca! \n" << endl;
-	return false;
+	return nullptr;
 }

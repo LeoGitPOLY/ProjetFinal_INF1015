@@ -12,7 +12,7 @@ Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet
 
 bool Clef::prendre() const
 {
-	cout << "Vous prenez la clef, elle pourra probablement vous etre utile..." << endl;
+	cout << "Vous prenez la clef, elle pourra probablement vous etre utile...\n" << endl;
 	return true;
 }
 

@@ -25,7 +25,7 @@ public:
 	virtual void regarder() const;
 	virtual void utiliser(shared_ptr<Case> caseActuelle);
 
-	friend ostream& operator<< (ostream& o, const unique_ptr<Objet>& ptrObjet);
+	friend ostream& operator<< (ostream& o, const shared_ptr<Objet> ptrObjet);
 private:
 	vector<string> motsImportants_;
 	

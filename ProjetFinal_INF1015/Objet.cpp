@@ -27,7 +27,7 @@ vector<string>& Objet::avoirMotsImportant()
 
 bool Objet::prendre() const
 {
-	cout << "Il est impossible de prendre: " << nom_ << endl;
+	cout << "Il est impossible de prendre: " << nom_ << "\n" << endl;
 	return false;
 }
 
@@ -41,7 +41,7 @@ void Objet::utiliser(shared_ptr<Case> caseActuelle)
 	cout << descriptionUtiliser_ << endl;
 }
 
-ostream& operator<<(ostream& o, const unique_ptr<Objet>& ptrObjet)
+ostream& operator<<(ostream& o, const shared_ptr<Objet> ptrObjet)
 {
 	o << "    " << ptrObjet->nom_ << endl;
 	return o;

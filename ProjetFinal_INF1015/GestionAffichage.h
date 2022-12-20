@@ -18,5 +18,5 @@ private:
 	static void regarderObjet(Jeu& jeu, string objetCommande);
 	static void utiliserObjet(Jeu& jeu, string objetCommande);
 
-	static bool verificationCorrespondance(Objet& objet, string objetCommande);
+	static shared_ptr<Objet> rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, string objetCommande);
 };

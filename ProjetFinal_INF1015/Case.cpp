@@ -37,7 +37,7 @@ shared_ptr<Case> Case::retournerCaseDirection(Direction direction) const
 	return casesAdjacente_.find(direction)->second;
 }
 
-vector<unique_ptr<Objet>>& Case::retournerObjets()
+vector<shared_ptr<Objet>>& Case::retournerObjets()
 {
 	return objets_;
 }
@@ -64,11 +64,12 @@ ostream& operator<<(ostream& o, const shared_ptr<Case>& ptrCase)
 	o << "--" << ptrCase->nom_ << "--" << endl;
 	o << ptrCase->description_ << endl;
 
-	if (ptrCase->objets_.size() != 0)
+	if (ptrCase->objets_.size() != 0) {
 		o << "Vous remarquez: " << endl;
 
-	for (auto& objet : ptrCase->objets_) // Kamil: il faudrait pas mettre ce for dans le if? Parce si objets_ est vide, il va quand meme faire ce for
-		o << objet;
+		for (auto objet : ptrCase->objets_)
+			o << objet;
+	}
 
 	o << "Les pieces adjacentes: " << endl;
 	for (auto& caseAdjacente : ptrCase->casesAdjacente_)

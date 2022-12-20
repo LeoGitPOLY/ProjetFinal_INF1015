@@ -17,10 +17,11 @@ public:
 	~Jeu();
 
 	void allerDansDirection(Direction direction);
+	void prendreObjet(shared_ptr<Objet> objet);
 
 	shared_ptr<Case> obtenirCaseDirection(Direction direction) const;
-	vector<unique_ptr<Objet>>& obtenirListeObjetJeu();
-	vector<unique_ptr<Objet>>& obtenirListeObjetCase();
+	vector<shared_ptr<Objet>>& obtenirListeObjetJeu();
+	vector<shared_ptr<Objet>>& obtenirListeObjetCase();
 
 	friend ostream& operator<< (ostream& o, const Jeu& ptrJeu);
 
@@ -29,5 +30,5 @@ private:
 
 	shared_ptr<Case> caseActuelle_;
 	vector<shared_ptr<Case>> casesDuJeu_;
-	vector<unique_ptr<Objet>> objets_;
+	vector<shared_ptr<Objet>> objets_;
 };

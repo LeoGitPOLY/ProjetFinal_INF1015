@@ -52,46 +52,62 @@ void Jeu::creationJeu()
 	Case::lienEntreCases({ petitChambre, Direction::Nord }, { grenier, Direction::Sud });
 
 	// CREATION DES OBJECTS
-	unique_ptr<Objet> chandelier = make_unique<Objet>("Chandelier");
+	shared_ptr<Objet> chandelier = make_shared<Objet>("Chandelier");
 	chandelier->creerDescription("des. Regarder", "des. utiliser");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
-	unique_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
+	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
 	clef->creerDescription("des. Regarder", "des. utiliser");
 	clef->ajouterMotsImportant({ "clef", "rouge"});
 
-	entree->retournerObjets().push_back(move(chandelier));
-	salon->retournerObjets().push_back(move(clef));
+	entree->retournerObjets().push_back(chandelier);
+	salon->retournerObjets().push_back(clef);
 
 	caseActuelle_ = entree;
 }
-
-
-shared_ptr<Case> Jeu::obtenirCaseDirection(Direction direction) const
-{
-	return caseActuelle_->retournerCaseDirection(direction);
-}
-
-vector<unique_ptr<Objet>>& Jeu::obtenirListeObjetJeu()
-{
-	return objets_;
-}
-
-vector<unique_ptr<Objet>>& Jeu::obtenirListeObjetCase()
-{
-	return caseActuelle_->retournerObjets();
-}
-
 
 void Jeu::allerDansDirection(Direction direction)
 {
 	caseActuelle_ = caseActuelle_->retournerCaseDirection(direction);
 }
 
+void Jeu::prendreObjet(shared_ptr<Objet> objet)
+{
+	vector <shared_ptr<Objet>> objets = caseActuelle_->retournerObjets();
+	objets.erase(remove(objets.begin(), objets.end(), objet), objets.end());
+
+	objets_.push_back(objet);
+}
+
+shared_ptr<Case> Jeu::obtenirCaseDirection(Direction direction) const
+{
+	return caseActuelle_->retournerCaseDirection(direction);
+}
+
+vector<shared_ptr<Objet>>& Jeu::obtenirListeObjetJeu()
+{
+	return objets_;
+}
+
+vector<shared_ptr<Objet>>& Jeu::obtenirListeObjetCase()
+{
+	return caseActuelle_->retournerObjets();
+}
+
 
 ostream& operator<<(ostream& o, const Jeu& jeu)
 {
-	o << jeu.caseActuelle_ << endl;
+	o << jeu.caseActuelle_;
+
+	if (jeu.objets_.size() != 0) {
+		o << "Vous avez: " << endl;
+
+		for (auto objet : jeu.objets_)
+			o << objet;
+	}
+
+	o << endl;
+
 	return o;
 }
 
