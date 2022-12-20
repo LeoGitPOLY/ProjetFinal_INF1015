@@ -10,10 +10,10 @@ Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet
 	caseUtiliser_ = caseUtiliser;
 }
 
-bool Clef::prendre() const
+void Clef::prendre(Jeu& jeu) const
 {
 	cout << "Vous prenez la clef, elle pourra probablement vous etre utile...\n" << endl;
-	return true;
+	jeu.prendreObjet();
 }
 
 void Clef::utiliser(shared_ptr<Case> caseActuelle)

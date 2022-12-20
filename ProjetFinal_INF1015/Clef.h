@@ -16,7 +16,7 @@ class Clef :public Objet
 public:
 	Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir);
 
-	bool prendre() const override;
+	void prendre(Jeu& jeu) const override;
 	void utiliser(shared_ptr<Case> caseActuelle) override;
 
 private:

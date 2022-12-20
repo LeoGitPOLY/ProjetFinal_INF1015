@@ -49,14 +49,14 @@ void Jeu::creationJeu()
 	Case::lienEntreCases({ entree, Direction::Nord }, { couloir, Direction::Sud });
 	Case::lienEntreCases({ couloir, Direction::Nord }, { cuisine, Direction::Sud });
 	Case::lienEntreCases({ couloir, Direction::Ouest }, { petitChambre, Direction::Est });
-	Case::lienEntreCases({ petitChambre, Direction::Nord }, { grenier, Direction::Sud });
+	Case::lienEntreCases({ petitChambre, Direction::Nord }, { grenier, Direction::Sud }); //Kamil: tas srm fait ca comme solution temporaure, mais on ne devrait pas connecter la petitChambre avec le grenier
 
 	// CREATION DES OBJECTS
 	shared_ptr<Objet> chandelier = make_shared<Objet>("Chandelier");
 	chandelier->creerDescription("des. Regarder", "des. utiliser");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
-	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
+	shared_ptr<Objet> clef = make_shared<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Ouest));
 	clef->creerDescription("des. Regarder", "des. utiliser");
 	clef->ajouterMotsImportant({ "clef", "rouge"});
 
@@ -73,8 +73,11 @@ void Jeu::allerDansDirection(Direction direction)
 
 void Jeu::prendreObjet(shared_ptr<Objet> objet)
 {
-	vector <shared_ptr<Objet>> objets = caseActuelle_->retournerObjets();
-	objets.erase(remove(objets.begin(), objets.end(), objet), objets.end());
+	vector <shared_ptr<Objet>>& objets = caseActuelle_->retournerObjets();
+
+	auto it = remove(objets.begin(), objets.end(), objet);
+	objets.erase(it, objets.end());
+	
 
 	objets_.push_back(objet);
 }

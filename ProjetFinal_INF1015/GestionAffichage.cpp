@@ -52,7 +52,7 @@ void GestionAffichage::gestionEntree(Jeu& jeu)
 
 void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
 {
-	vector<shared_ptr<Objet>> objets = jeu.obtenirListeObjetCase();
+	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetCase();
 
 	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
 		bool estPrenable = objet->prendre();

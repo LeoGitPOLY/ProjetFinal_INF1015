@@ -25,10 +25,10 @@ vector<string>& Objet::avoirMotsImportant()
 	return motsImportants_;
 }
 
-bool Objet::prendre() const
+void Objet::prendre(Jeu& jeu) const
 {
 	cout << "Il est impossible de prendre: " << nom_ << "\n" << endl;
-	return false;
+	
 }
 
 void Objet::regarder() const

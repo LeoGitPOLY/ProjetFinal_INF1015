@@ -7,7 +7,9 @@
 #include <iostream>
 #include <vector>
 
+class Jeu;
 class Case; //Foward decleration: pour eviter les references circulaires
+
 
 using namespace std;
 
@@ -21,7 +23,7 @@ public:
 	void ajouterMotsImportant(vector<string> mots);
 	vector<string>& avoirMotsImportant();
 
-	virtual bool prendre() const;
+	virtual void prendre(Jeu& jeu) const;
 	virtual void regarder() const;
 	virtual void utiliser(shared_ptr<Case> caseActuelle);
 
