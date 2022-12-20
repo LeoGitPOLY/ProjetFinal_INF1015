@@ -21,7 +21,9 @@ public:
 	
 	void creerDescription(string descriptionRegarder, string descriptionUtiliser);
 	void ajouterMotsImportant(vector<string> mots);
+	
 	vector<string>& avoirMotsImportant();
+	string avoirNom() const;
 
 	virtual void prendre(Jeu& jeu) const;
 	virtual void regarder() const;

@@ -25,10 +25,14 @@ vector<string>& Objet::avoirMotsImportant()
 	return motsImportants_;
 }
 
+string Objet::avoirNom() const
+{
+	return nom_;
+}
+
 void Objet::prendre(Jeu& jeu) const
 {
 	cout << "Il est impossible de prendre: " << nom_ << "\n" << endl;
-	
 }
 
 void Objet::regarder() const
