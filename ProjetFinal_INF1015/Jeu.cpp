@@ -79,7 +79,7 @@ void Jeu::prendreObjet(shared_ptr<Objet> objet)
 	for (auto it = objets.begin(); it != objets.end(); it ++)
 	{
 		if ((*it)->avoirNom() == objet->avoirNom())
-			itEnlever = remove(objets.begin(), objets.end(), objet);
+			itEnlever = remove(objets.begin(), objets.end(), *it);
 	}
 	objets.erase(itEnlever, objets.end());
 
