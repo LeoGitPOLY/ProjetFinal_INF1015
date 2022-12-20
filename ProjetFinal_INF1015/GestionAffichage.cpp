@@ -50,18 +50,23 @@ void GestionAffichage::gestionEntree(Jeu& jeu)
 	}
 }
 
+// si, dans la case actuelle du jeu, ya un objet dont le nom concorde avec objetCommande, on fait cet objet->prendre();
 void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
 {
 	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetCase();
 
 	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
-		//bool estPrenable = objet->prendre(jeu);
 		objet->prendre(jeu);
 	}
 }
 
 void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
 {
+	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetCase();
+
+	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
+		objet->utiliser(jeu, jeu.obtenirCaseActuelle());
+	}
 }
 
 void GestionAffichage::regarderObjet(Jeu& jeu, string objetCommande)

@@ -27,7 +27,7 @@ public:
 
 	virtual void prendre(Jeu& jeu) const;
 	virtual void regarder() const;
-	virtual void utiliser(shared_ptr<Case> caseActuelle);
+	virtual void utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle);
 
 	friend ostream& operator<< (ostream& o, const shared_ptr<Objet> ptrObjet);
 private:

@@ -40,7 +40,7 @@ void Objet::regarder() const
 	cout << descriptionRegarder_ << endl;
 }
 
-void Objet::utiliser(shared_ptr<Case> caseActuelle)
+void Objet::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
 {
 	cout << descriptionUtiliser_ << endl;
 }

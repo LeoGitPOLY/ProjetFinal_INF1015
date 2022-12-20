@@ -18,6 +18,7 @@ public:
 
 	void allerDansDirection(Direction direction);
 	void prendreObjet(shared_ptr<Objet> objet);
+	shared_ptr<Case>& obtenirCaseActuelle();
 
 	shared_ptr<Case> obtenirCaseDirection(Direction direction) const;
 	vector<shared_ptr<Objet>>& obtenirListeObjetJeu();

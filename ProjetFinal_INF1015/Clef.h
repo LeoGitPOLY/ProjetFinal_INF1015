@@ -17,7 +17,7 @@ public:
 	Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir);
 
 	void prendre(Jeu& jeu) const override;
-	void utiliser(shared_ptr<Case> caseActuelle) override;
+	void utiliser(Jeu& jeu,shared_ptr<Case> caseActuelle) override;
 
 private:
 	typeCaseDir caseUtiliser_, caseOuvrir_;

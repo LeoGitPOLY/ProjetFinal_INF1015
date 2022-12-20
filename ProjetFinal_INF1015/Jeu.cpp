@@ -57,7 +57,7 @@ void Jeu::creationJeu()
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
 	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
-	clef->creerDescription("des. Regarder", "des. utiliser");
+	clef->creerDescription("La clef est rouillée et semble très âgée...", "Vous tentez d'insérer la clef dans les serrures des portes présentes dans la pièce...");
 	clef->ajouterMotsImportant({ "clef", "rouge"});
 
 	entree->retournerObjets().push_back(chandelier);
@@ -71,9 +71,12 @@ void Jeu::allerDansDirection(Direction direction)
 	caseActuelle_ = caseActuelle_->retournerCaseDirection(direction);
 }
 
+// si, dans les objets de la case actuelle, il y en a un qui a le meme nom que celui du parametre objet (donc si l'objet est dans la case actuelle), 
+// on l'enleve de cette case et on l'ajoute dans les objets que le joueur possede
+// on voudrait que cette methode fasse juste enlever de la case actuelle l'objet et l'ajoute dans les objets que le joueur possede, car on sait deja que l'objet est dans la case actuelle
 void Jeu::prendreObjet(shared_ptr<Objet> objet)
 {
-	vector <shared_ptr<Objet>>& objets = caseActuelle_->retournerObjets();
+	vector <shared_ptr<Objet>>& objets = obtenirListeObjetCase();
 	auto itEnlever = objets.end();
 
 	for (auto it = objets.begin(); it != objets.end(); it ++)
@@ -83,12 +86,18 @@ void Jeu::prendreObjet(shared_ptr<Objet> objet)
 	}
 	objets.erase(itEnlever, objets.end());
 
+
 	objets_.push_back(objet);
 }
 
 shared_ptr<Case> Jeu::obtenirCaseDirection(Direction direction) const
 {
 	return caseActuelle_->retournerCaseDirection(direction);
+}
+
+shared_ptr<Case>& Jeu::obtenirCaseActuelle()
+{
+	return caseActuelle_;
 }
 
 vector<shared_ptr<Objet>>& Jeu::obtenirListeObjetJeu()

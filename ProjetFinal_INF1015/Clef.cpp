@@ -17,10 +17,12 @@ void Clef::prendre(Jeu& jeu) const
 	jeu.prendreObjet(make_shared<Objet>(*this));
 }
 
-void Clef::utiliser(shared_ptr<Case> caseActuelle)
+void Clef::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
 {
-	if (caseActuelle == caseUtiliser_.first)
+	if (caseActuelle == caseUtiliser_.first){
 		Case::lienEntreCases(caseUtiliser_, caseOuvrir_);
+		cout << "Un passage entre le couleur et la Salle R est ouvert!\n" << endl;
+	}
 	else
-		cout << "La clef ne fonctionne pas ici!" << endl;
+		cout << "La clef ne fonctionne pas ici! \n" << endl;
 }
