@@ -62,7 +62,7 @@ void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
 
 void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
 {
-	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetCase();
+	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetJeu();
 
 	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
 		objet->utiliser(jeu, jeu.obtenirCaseActuelle());
