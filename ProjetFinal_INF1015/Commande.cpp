@@ -55,6 +55,6 @@ void CommandeAllerDirection::execute(Jeu& jeu, vector<string>& commande)
 	}
 }
 
-void CommandeLook::execute(Jeu& jeu, vector<string>& commande) 
-{
-}
+//void CommandeLook::execute(Jeu& jeu, vector<string>& commande) 
+//{
+//}

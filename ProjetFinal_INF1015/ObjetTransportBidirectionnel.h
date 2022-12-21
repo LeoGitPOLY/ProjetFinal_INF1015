@@ -12,10 +12,10 @@
 using namespace std;
 
 
-class Echelle :public Objet
+class ObjetTransportBidirectionnel :public Objet
 {
 public:
-	Echelle(string nom, shared_ptr<Case> case1, shared_ptr<Case> case2);
+	ObjetTransportBidirectionnel(string nom, string descriptionRegarder, string descriptionUtiliser, string descriptionPrendre, shared_ptr<Case> case1, shared_ptr<Case> case2);
 	void utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle) override;
 
 private:

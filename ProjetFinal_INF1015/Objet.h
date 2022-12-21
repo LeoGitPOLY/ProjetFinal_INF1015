@@ -16,10 +16,10 @@ using namespace std;
 class Objet
 {
 public:
-	Objet(string nom);
+	Objet(string nom, string descriptionRegarder, string descriptionUtiliser, string descriptionPrendre);
 	virtual ~Objet() = default;
 	
-	void creerDescription(string descriptionRegarder, string descriptionUtiliser);
+
 	void ajouterMotsImportant(vector<string> mots);
 	
 	vector<string>& avoirMotsImportant();
@@ -32,10 +32,12 @@ public:
 	bool estPrenable() { return estPrenable_; }
 	friend ostream& operator<< (ostream& o, const shared_ptr<Objet> ptrObjet);
 private:
-	vector<string> motsImportants_;
+
 	string nom_;
 	string descriptionRegarder_;
 	string descriptionUtiliser_;
+	string descriptionPrendre_;
+	vector<string> motsImportants_;
 	bool estPrenable_;
 
 };

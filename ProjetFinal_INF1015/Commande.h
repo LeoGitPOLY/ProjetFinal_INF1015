@@ -47,8 +47,3 @@ public:
 	void execute(Jeu& jeu, vector<string>& commande) override;
 };
 
-class CommandeLook : public Commande {
-public:
-	CommandeLook(GestionAffichage& gestAff) : Commande(gestAff) { nameFonction_ = "Regarder case"; };
-	void execute(Jeu& jeu, vector<string>& commande) override;
-};

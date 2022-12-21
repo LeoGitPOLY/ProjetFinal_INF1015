@@ -5,15 +5,10 @@
 
 #include "Objet.h"
 
-Objet::Objet(string nom) :nom_(nom)
+Objet::Objet(string nom, string descriptionRegarder, string descriptionUtiliser, string descriptionPrendre) :
+	nom_(nom), descriptionRegarder_(descriptionRegarder), descriptionUtiliser_(descriptionUtiliser), descriptionPrendre_(descriptionPrendre)
 {
 	setEstPrenable(false);
-}
-
-void Objet::creerDescription(string descriptionRegarder, string descriptionUtiliser) // Kamil: j'aurais fait ca dans une liste d'initialisation
-{
-	descriptionRegarder_ = descriptionRegarder;
-	descriptionUtiliser_ = descriptionUtiliser;
 }
 
 void Objet::ajouterMotsImportant(vector<string> mots)
@@ -33,7 +28,7 @@ string Objet::avoirNom() const
 
 void Objet::prendre(Jeu& jeu) const
 {
-	cout << "Il est impossible de prendre: " << nom_ << "\n" << endl;
+	cout << descriptionPrendre_ << endl;
 }
 
 void Objet::regarder() const
@@ -43,7 +38,6 @@ void Objet::regarder() const
 
 void Objet::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
 {
-	cout << "UTILISER OBJET" << endl;
 	cout << descriptionUtiliser_ << "\n" << endl;
 }
 

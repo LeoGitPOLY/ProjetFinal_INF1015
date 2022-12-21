@@ -17,8 +17,6 @@ enum class Direction
 	Est = 'E',
 	Sud = 'S',
 	Ouest = 'O',
-	Haut = 'H',
-	Bas = 'B'
 };
 
 class Case

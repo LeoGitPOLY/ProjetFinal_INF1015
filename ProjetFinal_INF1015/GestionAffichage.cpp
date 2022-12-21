@@ -7,6 +7,24 @@
 
 using namespace std;
 
+// Nous avons voulu éviter d'utiliser string::find() pour savoir si un string fait partie d'un autre, donc nous avons implémenté manuellement cette fonctionnalité
+// Il n'etait pas approprié de donner à cette fonction un objet this, donc ce n'est qu'une fonction à côté
+bool estSubstring(string str1, string str2) {
+	for (size_t i = 0; i < str2.length(); ++i) {
+		if (str2[i] == str1[0]) {
+			size_t j;
+			for (j = 0; j < str1.length(); ++j) {
+				if (str2[i + j] != str1[j]) {
+					break;
+				}
+			}
+			if (j == str1.length())
+				return true;
+		}
+	}
+	return false;
+}
+
 GestionAffichage::GestionAffichage(Jeu& jeu) : jeu_(jeu)
 {
 	changerBesoinQuiter(false);
@@ -33,7 +51,6 @@ void GestionAffichage::afficherCommande()
 	cout << "(P/p/prendre):" << mapCommandes_["p"]->nameFonction_ << " | ";
 	cout << "(U/u/utiliser):" << mapCommandes_["u"]->nameFonction_ << "\n";
 	cout << "(R/r/regarder):" << mapCommandes_["r"]->nameFonction_ << " | ";
-	cout << "(L/l/look):" << mapCommandes_["l"]->nameFonction_ << " ouest\n";
 	cout << "(Q/q/quit):" << mapCommandes_["q"]->nameFonction_ << " ";
 
 	cout << "\n" << endl;
@@ -64,6 +81,7 @@ void GestionAffichage::gestionEntree()
 }
 
 // si, dans un vector d'objets, il y en un dont un des mots importants est dans objetCommande, retourner cet objet (en shared_ptr)
+// pour tout les mots importants de tous les objets dun vecteur dobjets, sil y en a un qui se retrouve dans un vecteur de string, retourner lobjet qui a ce mot important
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
@@ -71,7 +89,7 @@ shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>
 	for (shared_ptr<Objet> objet : objets) {
 		for (auto& motImportant : objet->avoirMotsImportant()) {
 			for (auto& motCommande : objetCommande)
-				if (motImportant == motCommande)
+				if (estSubstring(motImportant, motCommande)) 
 					return objet;
 		}
 	}
@@ -118,7 +136,6 @@ void GestionAffichage::initialiserMapCommandes()
 	shared_ptr<CommandePrendre> commandePrendre = make_shared<CommandePrendre>(*this);
 	shared_ptr<CommandeRegarder> commandeRegarder = make_shared<CommandeRegarder>(*this);
 	shared_ptr<CommandeAllerDirection> commandeDirection = make_shared<CommandeAllerDirection>(*this);
-	shared_ptr<CommandeLook> commandeLook = make_shared<CommandeLook>(*this);
 	shared_ptr<CommandeQuiter> commandeQuiter = make_shared<CommandeQuiter>(*this);
 
 	mapCommandes_["U"] = commandeUtiliser;
@@ -144,10 +161,6 @@ void GestionAffichage::initialiserMapCommandes()
 
 	mapCommandes_["O"] = commandeDirection;
 	mapCommandes_["o"] = commandeDirection;
-
-	mapCommandes_["L"] = commandeLook;
-	mapCommandes_["l"] = commandeLook;
-	mapCommandes_["look"] = commandeLook;
 
 	mapCommandes_["Q"] = commandeQuiter;
 	mapCommandes_["q"] = commandeQuiter;
