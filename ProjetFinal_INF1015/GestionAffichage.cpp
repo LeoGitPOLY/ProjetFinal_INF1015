@@ -63,7 +63,7 @@ void GestionAffichage::gestionEntree()
 	changerCouleurConsole(Couleur::DEFAUT);
 }
 
-// si, dans un vector d'objets, il y en un qui a objetCommande dans ses mots importants, retourner cet objet (en shared_ptr)
+// si, dans un vector d'objets, il y en un dont un des mots importants est dans objetCommande, retourner cet objet (en shared_ptr)
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?

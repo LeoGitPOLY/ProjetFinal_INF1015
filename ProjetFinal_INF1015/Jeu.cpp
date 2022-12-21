@@ -5,6 +5,7 @@
 
 #include "Jeu.h"
 #include "Clef.h"
+#include "Echelle.h"
 
 Jeu::Jeu()
 {
@@ -49,19 +50,24 @@ void Jeu::creationJeu()
 	Case::lienEntreCases({ entree, Direction::Nord }, { couloir, Direction::Sud });
 	Case::lienEntreCases({ couloir, Direction::Nord }, { cuisine, Direction::Sud });
 	Case::lienEntreCases({ couloir, Direction::Ouest }, { petitChambre, Direction::Est });
-	Case::lienEntreCases({ petitChambre, Direction::Nord }, { grenier, Direction::Sud });
 
 	// CREATION DES OBJECTS
 	shared_ptr<Objet> chandelier = make_shared<Objet>("Chandelier");
-	chandelier->creerDescription("des. Regarder", "des. utiliser");
+	chandelier->creerDescription("Le chandelier est une presence imposante dans la piece: fait de bronze, il illumine tous les environs", "On ne peut pas utiliser le chandelier!");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
 	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Ouest));
-	clef->creerDescription("La clef est rouillee et semble tres agee...", "Vous tentez d'inserer la clef dans les serrures des portes presentes dans la piece...");
+	clef->creerDescription("La clef est rouillee et semble tres agee...", "Un passage entre le couloir et la Salle R s'est ouvert!\n");
 	clef->ajouterMotsImportant({ "clef", "rouge"});
+
+	shared_ptr<Objet> echelle = make_shared<Echelle>("Echelle", petitChambre, grenier);
+	echelle->creerDescription("L'echelle est somme toute tres banale, et semble assez solide pour etre utilisee", "Vous prenez l'echelle pour changer de piece");
+	echelle->ajouterMotsImportant({ "echelle" });
 
 	entree->retournerObjets().push_back(chandelier);
 	salon->retournerObjets().push_back(clef);
+	petitChambre->retournerObjets().push_back(echelle);
+	grenier->retournerObjets().push_back(echelle);
 
 	caseActuelle_ = entree;
 }
@@ -71,8 +77,7 @@ void Jeu::allerDansDirection(Direction direction)
 	caseActuelle_ = caseActuelle_->retournerCaseDirection(direction);
 }
 
-// si, dans les objets de la case actuelle, il y en a un qui a le meme nom que celui du parametre objet (donc si l'objet est dans la case actuelle), 
-// on l'enleve de cette case et on l'ajoute dans les objets que le joueur possede
+// si l'objet est dans la case actuelle, on l'enleve de cette case et on l'ajoute dans les objets que le joueur possede
 // on voudrait que cette methode fasse juste enlever de la case actuelle l'objet et l'ajoute dans les objets que le joueur possede, car on sait deja que l'objet est dans la case actuelle
 void Jeu::prendreObjet(shared_ptr<Objet> objet)
 {

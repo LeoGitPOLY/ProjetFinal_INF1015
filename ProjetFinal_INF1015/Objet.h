@@ -28,12 +28,14 @@ public:
 	virtual void prendre(Jeu& jeu) const;
 	virtual void regarder() const;
 	virtual void utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle);
-
+	void setEstPrenable(bool estPrenable) { estPrenable_ = estPrenable; }
+	bool estPrenable() { return estPrenable_; }
 	friend ostream& operator<< (ostream& o, const shared_ptr<Objet> ptrObjet);
 private:
 	vector<string> motsImportants_;
-	
 	string nom_;
 	string descriptionRegarder_;
 	string descriptionUtiliser_;
+	bool estPrenable_;
+
 };

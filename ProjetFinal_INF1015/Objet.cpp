@@ -7,6 +7,7 @@
 
 Objet::Objet(string nom) :nom_(nom)
 {
+	setEstPrenable(false);
 }
 
 void Objet::creerDescription(string descriptionRegarder, string descriptionUtiliser) // Kamil: j'aurais fait ca dans une liste d'initialisation
