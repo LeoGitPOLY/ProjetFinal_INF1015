@@ -56,7 +56,7 @@ void Jeu::creationJeu()
 	chandelier->creerDescription("des. Regarder", "des. utiliser");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
-	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Sud));
+	shared_ptr<Objet> clef = make_unique<Clef>("Clef Rouge", pair(couloir, Direction::Est), pair(salleR, Direction::Ouest));
 	clef->creerDescription("La clef est rouillee et semble tres agee...", "Vous tentez d'inserer la clef dans les serrures des portes presentes dans la piece...");
 	clef->ajouterMotsImportant({ "clef", "rouge"});
 

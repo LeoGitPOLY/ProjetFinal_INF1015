@@ -6,6 +6,8 @@
 #pragma once
 #include <iostream>
 #include "Jeu.h"
+#include <functional>
+#include <map>
 
 class GestionAffichage
 {
@@ -17,6 +19,8 @@ private:
 	static void prendreObjet(Jeu& jeu, string objetCommande);
 	static void regarderObjet(Jeu& jeu, string objetCommande);
 	static void utiliserObjet(Jeu& jeu, string objetCommande);
+	/*void initialiserMapCommandes();*/
 
 	static shared_ptr<Objet> rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, string objetCommande);
+	/*map<string, function<void(Jeu&, string)>> mapCommandes_;*/
 };

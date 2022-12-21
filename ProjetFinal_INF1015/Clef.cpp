@@ -5,7 +5,7 @@
 #include"Jeu.h"
 #include "Clef.h"
 
-Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet(nom) // Kamil: j'aurais utilise une lsite d'initialisation
+Clef::Clef(string nom, typeCaseDir caseUtiliser, typeCaseDir caseOuvrir) : Objet(nom) // Kamil: j'aurais utilise une liste d'initialisation
 {
 	caseOuvrir_ = caseOuvrir;
 	caseUtiliser_ = caseUtiliser;
@@ -17,7 +17,7 @@ void Clef::prendre(Jeu& jeu) const
 	jeu.prendreObjet(make_shared<Objet>(*this));
 }
 
-void Clef::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
+void Clef::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle) 
 {
 	if (caseActuelle == caseUtiliser_.first){
 		Case::lienEntreCases(caseUtiliser_, caseOuvrir_);

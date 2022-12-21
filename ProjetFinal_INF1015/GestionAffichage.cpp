@@ -4,7 +4,6 @@
 // Nom de la classe: GestionAffichage.cpp
 
 #include "GestionAffichage.h"
-#include <functional>
 
 using namespace std;
 
@@ -17,12 +16,15 @@ void GestionAffichage::afficherEtapejeu(Jeu& jeu)
 
 void GestionAffichage::gestionEntree(Jeu& jeu)
 {
+	// map<string nomCommande, function<void(Jeu& jeu, objetEntree)>> mapCommandes;
+	// executerCommande(mapCommandes[CommandeEntree], objetEntree);
 	string CommandeEntree;
 	string objetEntree;
 
 	cout << ">";
 	cin >> CommandeEntree >> objetEntree;
 
+	//initialiserMapCommandes();
 	if (CommandeEntree == "N" || CommandeEntree == "S" || CommandeEntree == "E" || CommandeEntree == "O") {
 		Direction direction = static_cast<Direction>(CommandeEntree[0]);
 
@@ -48,6 +50,7 @@ void GestionAffichage::gestionEntree(Jeu& jeu)
 		cout << "Commande inconnue\n" << endl;
 		gestionEntree(jeu);
 	}
+	//mapCommandes_[CommandeEntree](jeu, objetEntree);
 }
 
 // si, dans la case actuelle du jeu, ya un objet dont le nom concorde avec objetCommande, on fait cet objet->prendre();
@@ -65,7 +68,7 @@ void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
 	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetJeu();
 
 	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
-		objet->utiliser(jeu, jeu.obtenirCaseActuelle());
+		objet->utiliser(jeu, jeu.obtenirCaseActuelle()); // Kamil: le polymorphisme ne marche pas, il utilise objet::utiliser() et non celle de clef, etrange
 	}
 }
 
@@ -73,6 +76,7 @@ void GestionAffichage::regarderObjet(Jeu& jeu, string objetCommande)
 {
 }
 
+// si, dans un vector d'objets, il y en un qui a objetCommande dans ses mots importants, retourner cet objet (en shared_ptr)
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, string objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
@@ -86,3 +90,11 @@ shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>
 	cout << "Aucun objet nommee comme ca! \n" << endl;
 	return nullptr;
 }
+
+//void GestionAffichage::initialiserMapCommandes()
+//{
+//	mapCommandes_["U"] = utiliserObjet;
+//	mapCommandes_["P"] = prendreObjet;
+//	mapCommandes_["R"] = regarderObjet;
+//}
+
