@@ -86,7 +86,6 @@ void Jeu::prendreObjet(shared_ptr<Objet> objet)
 	}
 	objets.erase(itEnlever, objets.end());
 
-
 	objets_.push_back(objet);
 }
 

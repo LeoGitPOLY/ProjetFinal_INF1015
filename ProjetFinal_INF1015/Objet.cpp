@@ -42,7 +42,8 @@ void Objet::regarder() const
 
 void Objet::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
 {
-	cout << descriptionUtiliser_ << endl;
+	cout << "UTILISER OBJET" << endl;
+	cout << descriptionUtiliser_ << "\n" << endl;
 }
 
 ostream& operator<<(ostream& o, const shared_ptr<Objet> ptrObjet)

@@ -12,17 +12,17 @@
 int main()
 {
 	Jeu jeu;
+	GestionAffichage gestionAffichage(jeu);
 
 	cout << ">>>>> INF1015 DUNGEON CRAWLER <<<<<" << endl;
-	cout << "  Leonard Pouliot & Kamil Maarite\n" << endl;
+	cout << "  Leonard Pouliot & Kamil Maarite" << endl;
+	gestionAffichage.afficherCommande();
 
-	//int i = 0; Uniquement pour tester quand le progarmme termine
+
 	while (true) {
-		/*if (i == 3)
+		if (gestionAffichage.avoirBesoinQuiter())
 			break;
-		else
-			i++;*/
 
-		GestionAffichage::afficherEtapejeu(jeu);
+		gestionAffichage.afficherEtapejeu();
 	}
 }

@@ -7,94 +7,150 @@
 
 using namespace std;
 
-void GestionAffichage::afficherEtapejeu(Jeu& jeu)
+GestionAffichage::GestionAffichage(Jeu& jeu) : jeu_(jeu)
 {
-	cout << jeu;
-	gestionEntree(jeu);
+	changerBesoinQuiter(false);
+	initialiserMapCommandes();
 }
 
-
-void GestionAffichage::gestionEntree(Jeu& jeu)
+void GestionAffichage::afficherEtapejeu()
 {
-	// map<string nomCommande, function<void(Jeu& jeu, objetEntree)>> mapCommandes;
-	// executerCommande(mapCommandes[CommandeEntree], objetEntree);
-	string CommandeEntree;
-	string objetEntree;
+	cout << jeu_;
+	gestionEntree();
+}
+
+void GestionAffichage::afficherCommande()
+{
+	changerCouleurConsole(Couleur::VERT);
+
+	cout << "Les commandes du jeu sont: " << endl;
+	string dernierNom;
+
+	cout << "(N/n):" << mapCommandes_["n"]->nameFonction_ << " nord | ";
+	cout << "(E/e):" << mapCommandes_["e"]->nameFonction_ << " est\n";
+	cout << "(S/s):" << mapCommandes_["s"]->nameFonction_ << " sud | ";
+	cout << "(O/o):" << mapCommandes_["o"]->nameFonction_ << " ouest\n";
+	cout << "(P/p/prendre):" << mapCommandes_["p"]->nameFonction_ << " | ";
+	cout << "(U/u/utiliser):" << mapCommandes_["u"]->nameFonction_ << "\n";
+	cout << "(R/r/regarder):" << mapCommandes_["r"]->nameFonction_ << " | ";
+	cout << "(L/l/look):" << mapCommandes_["l"]->nameFonction_ << " ouest\n";
+	cout << "(Q/q/quit):" << mapCommandes_["q"]->nameFonction_ << " ";
+
+	cout << "\n" << endl;
+	changerCouleurConsole(Couleur::DEFAUT);
+}
+
+void GestionAffichage::gestionEntree()
+{
+	string commandeEntree;
+	vector<string> vectorCommandeEntree;
+
+	changerCouleurConsole(Couleur::DEFAUT);
 
 	cout << ">";
-	cin >> CommandeEntree >> objetEntree;
+	getline(cin, commandeEntree); // comme un cin normal, mais ne s'arrete pas pour les espaces
+	vectorCommandeEntree = diviserParMots(commandeEntree);
 
-	//initialiserMapCommandes();
-	if (CommandeEntree == "N" || CommandeEntree == "S" || CommandeEntree == "E" || CommandeEntree == "O") {
-		Direction direction = static_cast<Direction>(CommandeEntree[0]);
+	changerCouleurConsole(Couleur::ROUGE);
 
-		if (jeu.obtenirCaseDirection(direction) != nullptr) {
-			jeu.allerDansDirection(direction);
-			cout << "Aller " << Case::directionNom_[direction] << "\n" << endl;
-		}
-		else {
-			cout << "Vous ne pouvez pas aller la!\n" << endl;
-			gestionEntree(jeu);
-		}
-	}
-	else if (CommandeEntree == "U") { //Leo: En attendant que la bonne maniere sois fait, pour tester
-		utiliserObjet(jeu, objetEntree);
-	}
-	else if (CommandeEntree == "P") { //Leo: En attendant que la bonne maniere sois fait, pour tester
-		prendreObjet(jeu, objetEntree);
-	}
-	else if (CommandeEntree == "R") { //Leo: En attendant que la bonne maniere sois fait, pour tester
-		regarderObjet(jeu, objetEntree);
-	}
+	if (shared_ptr<Commande> commande = mapCommandes_[vectorCommandeEntree[0]])
+		commande->execute(jeu_, vectorCommandeEntree);
 	else {
 		cout << "Commande inconnue\n" << endl;
-		gestionEntree(jeu);
+		gestionEntree();
 	}
-	//mapCommandes_[CommandeEntree](jeu, objetEntree);
-}
 
-// si, dans la case actuelle du jeu, ya un objet dont le nom concorde avec objetCommande, on fait cet objet->prendre();
-void GestionAffichage::prendreObjet(Jeu& jeu, string objetCommande)
-{
-	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetCase();
-
-	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
-		objet->prendre(jeu);
-	}
-}
-
-void GestionAffichage::utiliserObjet(Jeu& jeu, string objetCommande)
-{
-	vector<shared_ptr<Objet>>& objets = jeu.obtenirListeObjetJeu();
-
-	if (shared_ptr<Objet> objet = rechercheBanqueMots(objets, objetCommande)) {
-		objet->utiliser(jeu, jeu.obtenirCaseActuelle()); // Kamil: le polymorphisme ne marche pas, il utilise objet::utiliser() et non celle de clef, etrange
-	}
-}
-
-void GestionAffichage::regarderObjet(Jeu& jeu, string objetCommande)
-{
+	changerCouleurConsole(Couleur::DEFAUT);
 }
 
 // si, dans un vector d'objets, il y en un qui a objetCommande dans ses mots importants, retourner cet objet (en shared_ptr)
-shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, string objetCommande)
+shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
 	// Ou quelque chose comme ca, non?
 	for (shared_ptr<Objet> objet : objets) {
-		for (auto& mot : objet->avoirMotsImportant()) {
-			if (mot == objetCommande)
-				return objet;
+		for (auto& motImportant : objet->avoirMotsImportant()) {
+			for (auto& motCommande : objetCommande)
+				if (motImportant == motCommande)
+					return objet;
 		}
 	}
 	cout << "Aucun objet nommee comme ca! \n" << endl;
 	return nullptr;
 }
 
-//void GestionAffichage::initialiserMapCommandes()
-//{
-//	mapCommandes_["U"] = utiliserObjet;
-//	mapCommandes_["P"] = prendreObjet;
-//	mapCommandes_["R"] = regarderObjet;
-//}
+vector<string> GestionAffichage::diviserParMots(string commande)
+{
+	vector<string> mots;
+	string::iterator itDebutMot = commande.begin();
+
+	for (auto it = commande.begin(); it != commande.end(); it++)
+	{
+		if (*it == ' ') {
+			mots.push_back(string(itDebutMot, it));
+			itDebutMot = it + 1;
+		}
+		else if (next(it) == commande.end()) {
+			mots.push_back(string(itDebutMot, next(it)));
+		}
+	}
+
+	if (mots.size() == 0)
+		mots.push_back(" ");
+
+	return mots;
+}
+
+void GestionAffichage::changerCouleurConsole(Couleur couleur)
+{
+	if (couleur == Couleur::ROUGE) { cout << "\033[91m"; }
+	else if (couleur == Couleur::BLEU) { cout << "\033[94m"; }
+	else if (couleur == Couleur::VERT) { cout << "\033[92m"; }
+	else if (couleur == Couleur::DEFAUT) { cout << "\033[0m"; }
+
+}
+
+void GestionAffichage::initialiserMapCommandes()
+{
+	shared_ptr<GestionAffichage> gestAff = make_shared<GestionAffichage>(*this);
+
+	shared_ptr<CommandeUtiliser> commandeUtiliser = make_shared<CommandeUtiliser>(*this);
+	shared_ptr<CommandePrendre> commandePrendre = make_shared<CommandePrendre>(*this);
+	shared_ptr<CommandeRegarder> commandeRegarder = make_shared<CommandeRegarder>(*this);
+	shared_ptr<CommandeAllerDirection> commandeDirection = make_shared<CommandeAllerDirection>(*this);
+	shared_ptr<CommandeLook> commandeLook = make_shared<CommandeLook>(*this);
+	shared_ptr<CommandeQuiter> commandeQuiter = make_shared<CommandeQuiter>(*this);
+
+	mapCommandes_["U"] = commandeUtiliser;
+	mapCommandes_["u"] = commandeUtiliser;
+	mapCommandes_["utiliser"] = commandeUtiliser;
+
+	mapCommandes_["P"] = commandePrendre;
+	mapCommandes_["p"] = commandePrendre;
+	mapCommandes_["prendre"] = commandePrendre;
+
+	mapCommandes_["R"] = commandeRegarder;
+	mapCommandes_["r"] = commandeRegarder;
+	mapCommandes_["regarder"] = commandeRegarder;
+
+	mapCommandes_["N"] = commandeDirection;
+	mapCommandes_["n"] = commandeDirection;
+
+	mapCommandes_["E"] = commandeDirection;
+	mapCommandes_["e"] = commandeDirection;
+
+	mapCommandes_["S"] = commandeDirection;
+	mapCommandes_["s"] = commandeDirection;
+
+	mapCommandes_["O"] = commandeDirection;
+	mapCommandes_["o"] = commandeDirection;
+
+	mapCommandes_["L"] = commandeLook;
+	mapCommandes_["l"] = commandeLook;
+	mapCommandes_["look"] = commandeLook;
+
+	mapCommandes_["Q"] = commandeQuiter;
+	mapCommandes_["q"] = commandeQuiter;
+	mapCommandes_["quit"] = commandeQuiter;
+}
 
