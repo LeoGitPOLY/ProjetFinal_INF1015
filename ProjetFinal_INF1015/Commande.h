@@ -1,3 +1,8 @@
+// Auteurs: Leonard Pouliot (2150965) et Kamil Maarite (2152653)
+// Date: 21 decembre 2022
+// Cours: INF1015
+// Nom de la classe: Commande.hpp
+
 #pragma once
 #include <iostream>
 #include <map>

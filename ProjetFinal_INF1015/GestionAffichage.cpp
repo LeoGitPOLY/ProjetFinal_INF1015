@@ -93,7 +93,6 @@ shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>
 					return objet;
 		}
 	}
-	/*cout << "Aucun objet nommee comme ca! \n" << endl;*/
 	return nullptr;
 }
 

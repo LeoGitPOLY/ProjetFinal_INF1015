@@ -23,15 +23,15 @@ Jeu::~Jeu()
 
 void Jeu::creationJeu()
 {
-	pair infoEntree("Entree", "Voici l'entree de la maison, il y a une vielle porte en bois et des chandelles aux murs.");
-	pair infoSalon("Salon", "Voici le salon de la maison, il y a un vieux divan defonce et une table basse.");
-	pair infoCouloir("Couloir", "Voici le couloir de la maison, tres etroit et lugubre.");
+	pair infoEntree("Entree", "Voici l'entree de la maison, il y a une vielle porte en bois et des chandelles aux murs");
+	pair infoSalon("Salon", "Voici le salon de la maison, il y a un vieux divan defonce et une table basse");
+	pair infoCouloir("Couloir", "Voici le couloir de la maison, tres etroit et lugubre");
 	pair infoPetiteChambre("Petite chambre", "Voici la petite chambre de la maison, on dirait que quelqu'un y a dormit recemment.");
-	pair infoGrenier("Grenier", "Voici le grenier de la maison, il y a un vieux coffre sous une couche de poussiere.");
-	pair infoCuisine("Cuisine", "Voici la cuisine de la maison, il y a un nombre anormale de couteaux.");
+	pair infoGrenier("Grenier", "Voici le grenier de la maison. L'air est tres sale, et la visibilite est reduite a cause du manque de lumiere");
+	pair infoCuisine("Cuisine", "Voici la cuisine de la maison, il y a un nombre anormale de couteaux");
 	pair infoSalleR("Salle R", "Voici la mysterieuse Salle R");
 	pair infoSousSol("Sous-Sol", "Voici le sous-sol de la maison. Il y a des vieux livres qui trainent un peu partout et une inscription sur un des murs lit '42069 forever'... Les gens qui ont habite cette maison sont decidement de haute culture!");
-	pair infoCaveVin("Cave a vin", "Voici la cave a vin. La piece est fortement illuminee par des lampadaires et l'air empeste de l'alcool. Mmmmhhh.... une envie soudaine vous prend de faire un tour d'auto");
+	pair infoCaveVin("Cave a vin", "Voici la cave a vin. La piece est fortement illuminee par des lampadaires et l'air empeste de l'alcool. Miammmhh...");
 
 	shared_ptr<Case> entree = make_shared<Case>(infoEntree.first, infoEntree.second);
 	shared_ptr<Case> salon = make_shared<Case>(infoSalon.first, infoSalon.second);
@@ -59,27 +59,27 @@ void Jeu::creationJeu()
 	Case::lienEntreCases({ couloir, Direction::Ouest }, { petitChambre, Direction::Est });
 
 	// CREATION DES OBJECTS
-	shared_ptr<Objet> chandelier = make_shared<Objet>("Chandelier", "Le chandelier est une presence imposante dans la piece: fait de bronze, il illumine tous les environs", 
-		"On ne peut pas utiliser le chandelier!", "On ne peut pas prendre le chandelier!");
+	shared_ptr<Objet> chandelier = make_shared<Objet>("Un majestueux chandelier", "Le chandelier est une presence imposante dans la piece: fait de bronze, il illumine tous les environs", 
+		"Vous tentez d'eteindre la flamme du chandelier avec vos doigts, mais elle brule si fort que vous en etes incapable et vous vous bruler le bout des doigts", "Vous essayez de prendre le chandelier, mais il semble fixe au mur");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
 
-	shared_ptr<Objet> clef = make_shared<ObjetDeverouillant>("Clef Rouge", "La clef est rouillee et semble tres agee...", 
-		"Un passage entre le couloir et la Salle R s'est ouvert!\n","Vous prenez la clef, elle pourra probablement vous etre utile...\n",
+	shared_ptr<Objet> clef = make_shared<ObjetDeverouillant>("Une petite clef rouge", "La clef est rouillee et semble tres agee...", 
+		"Un passage entre le couloir et la Salle R s'est ouvert!","Vous prenez la clef, elle pourra probablement vous etre utile...",
 		pair(couloir, Direction::Est), pair(salleR, Direction::Ouest));
 	clef->ajouterMotsImportant({ "clef", "rouge"});
 
-	shared_ptr<Objet> bouleCristal = make_shared<ObjetDeverouillant>("Boule de Cristal", "La boule de cristal est d'une lueur etrange et indescriptible. Elle emet une lumiere continuellement en mouvement, comme si elle etait vivante...","Un passage entre le sous-sol et la cave a vin s'est ouvert!\n", "Vous prenez la boule de cristal: ce faisant, vous croyez entendre un faible ricanement\n", pair(sousSol, Direction::Sud), pair(caveVin, Direction::Nord));
+	shared_ptr<Objet> bouleCristal = make_shared<ObjetDeverouillant>("Une boule de cristal", "La boule de cristal est d'une lueur etrange et indescriptible. Elle emet une lumiere continuellement en mouvement, comme si elle etait vivante...","Un passage entre le sous-sol et la cave a vin s'est ouvert!", "Vous prenez la boule de cristal: ce faisant, vous croyez entendre un faible ricanement\n", pair(sousSol, Direction::Sud), pair(caveVin, Direction::Nord));
 	bouleCristal->ajouterMotsImportant({ "boule", "cristal" });
 
-	shared_ptr<Objet> echelle = make_shared<ObjetTransportBidirectionnel>("Echelle", "L'echelle est somme toute tres banale, et semble assez solide pour etre utilisee",
-		"Vous prenez l'echelle pour changer de piece", "On ne peut pas prendre l'echelle!", petitChambre, grenier);
+	shared_ptr<Objet> echelle = make_shared<ObjetTransportBidirectionnel>("Une echelle en bois", "L'echelle est somme toute tres banale, et semble assez solide pour etre utilisee",
+		"Vous prenez l'echelle pour changer de piece", "L'echelle fait partie de la structure de la maison et ne peut pas etre prise", petitChambre, grenier);
 	echelle->ajouterMotsImportant({"echelle"});
 
-	shared_ptr<Objet> trappe = make_shared<ObjetTransportUnidirectionnel>("Trappe Beante", "La trappe est recouverte de poussiere et de detritus, comme si quelqu'un essayait de la cacher... Vous sentez une brise fraiche monter de la trappe", "Vous prenez votre courage a deux mains et decidez de sauter par la trappe", "On ne peut pas prendre la trappe!",
+	shared_ptr<Objet> trappe = make_shared<ObjetTransportUnidirectionnel>("Une trappe beante", "La trappe est recouverte de poussiere et de detritus, comme si quelqu'un essayait de la cacher... Vous sentez une brise fraiche monter de la trappe", "Vous prenez votre courage a deux mains et decidez de sauter par la trappe", "C'est un peu absurde d'essayer de prendre un objet qui est defini par l'absence de matiere, n'est-ce pas? :)))",
 		cuisine, sousSol);
 	trappe->ajouterMotsImportant({ "trappe", "beante"});
 
-	shared_ptr<Objet> corde = make_shared<ObjetTransportUnidirectionnel>("Longue Corde Rugueuse", "La corde pendouille d'un haut plafond. Elle a l'air rugueuse et remplie d'echardes, mais assez stable pour vous permettre de la grimper", "Vous aggrippez la corde de toutes vos forces avec vos mains et vos jambes, et faites laborieusement la montee...", "On ne peut pas prendre la corde!",
+	shared_ptr<Objet> corde = make_shared<ObjetTransportUnidirectionnel>("Une longue corde rugueuse", "La corde pendouille d'un haut plafond. Elle a l'air rugueuse et remplie d'echardes, mais assez stable pour vous permettre de la grimper", "Vous aggrippez la corde de toutes vos forces avec vos mains et vos jambes, et faites laborieusement la montee...", "On ne peut pas prendre la corde!",
 		caveVin, couloir);
 	corde->ajouterMotsImportant({ "longue", "corde", "rugueuse"});
 
