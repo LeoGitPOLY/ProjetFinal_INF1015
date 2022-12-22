@@ -21,7 +21,4 @@ void ObjetTransportBidirectionnel::utiliser(Jeu& jeu, shared_ptr<Case> caseActue
 		Objet::utiliser(jeu, caseActuelle);
 		jeu.obtenirCaseActuelle() = case1_;
 	}
-	else
-		cout << "Il n'y a pas de tel objet dans cette piece!\n";
-
 }

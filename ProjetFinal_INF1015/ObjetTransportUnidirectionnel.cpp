@@ -17,10 +17,4 @@ void ObjetTransportUnidirectionnel::utiliser(Jeu& jeu, shared_ptr<Case> caseActu
 		Objet::utiliser(jeu, caseActuelle);
 		jeu.obtenirCaseActuelle() = caseArrivee_;
 	}
-	else if (caseActuelle == caseArrivee_) {
-		cout << "Vous ne pouvez pas revenir en arriere avec cet objet!\n";
-	}
-	else
-		cout << "Il n'y a pas de tel objet dans cette piece!\n";
-
 }

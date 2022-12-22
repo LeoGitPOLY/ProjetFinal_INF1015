@@ -80,8 +80,6 @@ void GestionAffichage::gestionEntree()
 	changerCouleurConsole(Couleur::DEFAUT);
 }
 
-
-// pour tout les mots importants de tous les objets dun vecteur dobjets, sil y en a un qui se retrouve dans un vecteur de string, retourner lobjet qui a ce mot important
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
 	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?

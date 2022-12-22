@@ -26,7 +26,7 @@ public:
 	~Case();
 
 	shared_ptr<Case> retournerCaseDirection(Direction direction) const;
-	vector<shared_ptr<Objet>>& retournerObjets(); // Leo: Probablement a enlever pour l'encapsulation, mais je sais pas encore ce qu'on a besoin sur les objets
+	vector<shared_ptr<Objet>>& retournerObjets(); 
 	void supprimerLiens();
 
 	friend ostream& operator<< (ostream& o, const shared_ptr<Case>& ptrCase);

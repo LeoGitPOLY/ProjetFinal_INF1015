@@ -6,7 +6,6 @@
 #include "Commande.h"
 #include "GestionAffichage.h"
 
-// si, parmi les objets de la case actuelle, il y en un dont un des mots importants existe dans commande, on fait objet-> prendre()
 void CommandePrendre::execute(Jeu& jeu, vector<string>& commande)
 {
 	if (commande.size()>1){
@@ -14,14 +13,12 @@ void CommandePrendre::execute(Jeu& jeu, vector<string>& commande)
 		if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objets, commande)) {
 			objet->prendre(jeu);
 		}
-		else { cout << "Aucun objet nommee comme ca! \n" << endl; }
+		else { cout << "Aucun objet nomme comme ca dans la case! \n" << endl; }
 	}
 	else { cout << "Vous devez entrer un objet a prendre! \n" << endl; }
 
 }
 
-// si, parmi les objets de la case actuelle, il y en un dont un des mots importants existe dans commande, le joueur ne l'a pas sur lui et on lui dit
-// si, parmi les objets que le joueur possede, il y en un dont un des mots importants existe dans commande, on fait objet->utiliser()
 void CommandeUtiliser::execute(Jeu& jeu, vector<string>& commande)
 {
 	if (commande.size() > 1) {
@@ -36,7 +33,7 @@ void CommandeUtiliser::execute(Jeu& jeu, vector<string>& commande)
 		else if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objetsJeu, commande)) {
 			objet->utiliser(jeu, jeu.obtenirCaseActuelle());
 		}
-		else { cout << "Aucun objet nommee comme ca! \n" << endl; }
+		else { cout << "Aucun objet nomme comme ca! \n" << endl; }
 	}
 	else {cout << "Vous devez entrer un objet a utiliser! \n" << endl;}
 
@@ -49,7 +46,7 @@ void CommandeRegarder::execute(Jeu& jeu, vector<string>& commande)
 		if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objetsCase, commande)) {
 			objet->regarder();
 		}
-		else { cout << "Aucun objet nommee comme ca! \n" << endl; }
+		else { cout << "Aucun objet nomme comme ca! \n" << endl; }
 	}
 }
 

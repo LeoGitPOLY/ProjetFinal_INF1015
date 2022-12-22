@@ -29,7 +29,7 @@ public:
 	virtual void regarder() const;
 	virtual void utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle);
 	void setEstPrenable(bool estPrenable) { estPrenable_ = estPrenable; }
-	bool estPrenable() { return estPrenable_; }
+	bool estPrenable() const{ return estPrenable_; } 
 	friend ostream& operator<< (ostream& o, const shared_ptr<Objet> ptrObjet);
 private:
 

@@ -2,6 +2,7 @@
 // Date: 14 decembre 2022
 // Cours: INF1015
 // Nom de la classe: ObjetDeverouillant.cpp
+
 #include"Jeu.h"
 #include "ObjetDeverouillant.h"
 
@@ -25,6 +26,6 @@ void ObjetDeverouillant::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)
 		Objet::utiliser(jeu, caseActuelle);
 	}
 	else
-		cout << "La clef ne fonctionne pas ici! \n" << endl;
+		cout << "L'objet ne fonctionne pas ici! \n" << endl;
 }
 
