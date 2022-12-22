@@ -9,6 +9,7 @@ void CommandePrendre::execute(Jeu& jeu, vector<string>& commande)
 	if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objets, commande)) {
 		objet->prendre(jeu);
 	}
+	else {cout << "Aucun objet nommee comme ca! \n" << endl;}
 }
 
 // si, parmi les objets de la case actuelle, il y en un dont un des mots importants existe dans commande, le joueur ne l'a pas sur lui et on lui dit
@@ -26,13 +27,17 @@ void CommandeUtiliser::execute(Jeu& jeu, vector<string>& commande)
 	else if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objetsJeu, commande)) {
 		objet->utiliser(jeu, jeu.obtenirCaseActuelle());
 	}
+	else { cout << "Aucun objet nommee comme ca! \n" << endl; }
 }
 
 void CommandeRegarder::execute(Jeu& jeu, vector<string>& commande)
 {
 	vector<shared_ptr<Objet>>& objetsCase = jeu.obtenirListeObjetCase();
-	if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objetsCase, commande)) {
-		objet->regarder();
+	if (commande.size()!=1){
+		if (shared_ptr<Objet> objet = gestAff_.rechercheBanqueMots(objetsCase, commande)) {
+			objet->regarder();
+		}
+		else { cout << "Aucun objet nommee comme ca! \n" << endl; }
 	}
 }
 
@@ -54,7 +59,3 @@ void CommandeAllerDirection::execute(Jeu& jeu, vector<string>& commande)
 		cout << "Vous ne pouvez pas aller la!\n" << endl;
 	}
 }
-
-//void CommandeLook::execute(Jeu& jeu, vector<string>& commande) 
-//{
-//}

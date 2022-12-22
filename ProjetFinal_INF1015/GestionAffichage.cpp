@@ -80,7 +80,7 @@ void GestionAffichage::gestionEntree()
 	changerCouleurConsole(Couleur::DEFAUT);
 }
 
-// si, dans un vector d'objets, il y en un dont un des mots importants est dans objetCommande, retourner cet objet (en shared_ptr)
+
 // pour tout les mots importants de tous les objets dun vecteur dobjets, sil y en a un qui se retrouve dans un vecteur de string, retourner lobjet qui a ce mot important
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
@@ -93,7 +93,7 @@ shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>
 					return objet;
 		}
 	}
-	cout << "Aucun objet nommee comme ca! \n" << endl;
+	/*cout << "Aucun objet nommee comme ca! \n" << endl;*/
 	return nullptr;
 }
 

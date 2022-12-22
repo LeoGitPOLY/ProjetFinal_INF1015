@@ -28,12 +28,12 @@ string Objet::avoirNom() const
 
 void Objet::prendre(Jeu& jeu) const
 {
-	cout << descriptionPrendre_ << endl;
+	cout << descriptionPrendre_ << "\n" << endl;
 }
 
 void Objet::regarder() const
 {
-	cout << descriptionRegarder_ << endl;
+	cout << descriptionRegarder_ << "\n" << endl;
 }
 
 void Objet::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle)

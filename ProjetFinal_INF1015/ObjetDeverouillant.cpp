@@ -21,7 +21,6 @@ void ObjetDeverouillant::prendre(Jeu& jeu) const
 void ObjetDeverouillant::utiliser(Jeu& jeu, shared_ptr<Case> caseActuelle) 
 {
 	if (caseActuelle == caseUtiliser_.first){
-		cout << "UTILISER OBJET" << endl;
 		Case::lienEntreCases(caseUtiliser_, caseOuvrir_);
 		Objet::utiliser(jeu, caseActuelle);
 	}
