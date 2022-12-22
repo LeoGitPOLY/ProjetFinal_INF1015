@@ -65,7 +65,7 @@ void GestionAffichage::gestionEntree()
 	changerCouleurConsole(Couleur::DEFAUT);
 
 	cout << ">";
-	getline(cin, commandeEntree); // comme un cin normal, mais ne s'arrete pas pour les espaces
+	getline(cin, commandeEntree);
 	vectorCommandeEntree = diviserParMots(commandeEntree);
 
 	changerCouleurConsole(Couleur::ROUGE);
@@ -82,8 +82,6 @@ void GestionAffichage::gestionEntree()
 
 shared_ptr<Objet> GestionAffichage::rechercheBanqueMots(vector<shared_ptr<Objet>>& objets, vector<string>& objetCommande)
 {
-	//Leo: va aussi devoir rajouter ici que c<est possible de ne pas avoir le mot au complet?
-	// Ou quelque chose comme ca, non?
 	for (shared_ptr<Objet> objet : objets) {
 		for (auto& motImportant : objet->avoirMotsImportant()) {
 			for (auto& motCommande : objetCommande)

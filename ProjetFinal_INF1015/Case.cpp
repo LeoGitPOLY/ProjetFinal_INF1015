@@ -42,6 +42,11 @@ vector<shared_ptr<Objet>>& Case::retournerObjets()
 	return objets_;
 }
 
+map<Direction, string>& Case::retournerDescriptionNom()
+{
+	return directionNom_;
+}
+
 void Case::supprimerLiens()
 {
 	for (auto& elem : casesAdjacente_) {

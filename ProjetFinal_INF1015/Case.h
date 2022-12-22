@@ -27,15 +27,16 @@ public:
 
 	shared_ptr<Case> retournerCaseDirection(Direction direction) const;
 	vector<shared_ptr<Objet>>& retournerObjets(); 
+
 	void supprimerLiens();
 
 	friend ostream& operator<< (ostream& o, const shared_ptr<Case>& ptrCase);
 
 	static void lienEntreCases(pair<shared_ptr<Case>, Direction> case1, pair<shared_ptr<Case>, Direction> case2);
-	static map<Direction, string> directionNom_;
-
+	static map<Direction, string>& retournerDescriptionNom();
 private:
 	void fixerCaseAdjacente(Direction direction, const shared_ptr<Case> caseAdjacente);
+	static map<Direction, string> directionNom_;
 
 	string nom_;
 	string description_;

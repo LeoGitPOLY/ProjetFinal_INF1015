@@ -62,7 +62,7 @@ void Jeu::creationJeu()
 	Case::lienEntreCases({ couloir, Direction::Nord }, { cuisine, Direction::Sud });
 	Case::lienEntreCases({ couloir, Direction::Ouest }, { petitChambre, Direction::Est });
 
-	// CREATION DES OBJECTS
+
 	shared_ptr<Objet> chandelier = make_shared<Objet>("Un majestueux chandelier", "Le chandelier est une presence imposante dans la piece: fait de bronze, il illumine tous les environs", 
 		"Vous tentez d'eteindre la flamme du chandelier avec vos doigts, mais elle brule si fort que vous en etes incapable et vous vous brulez le bout des doigts", "Vous essayez de prendre le chandelier, mais il semble fixe au mur");
 	chandelier->ajouterMotsImportant({"chandelier" , "chandelle", "feu"});
@@ -149,7 +149,6 @@ vector<shared_ptr<Objet>>& Jeu::obtenirListeObjetCase()
 {
 	return caseActuelle_->retournerObjets();
 }
-
 
 ostream& operator<<(ostream& o, const Jeu& jeu)
 {

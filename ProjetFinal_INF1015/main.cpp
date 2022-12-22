@@ -7,8 +7,6 @@
 #include "GestionAffichage.h"
 #include "Jeu.h"
 
-
-
 int main()
 {
 	Jeu jeu;
@@ -17,7 +15,6 @@ int main()
 	cout << ">>>>> INF1015 DUNGEON CRAWLER <<<<<" << endl;
 	cout << "  Leonard Pouliot & Kamil Maarite" << endl;
 	gestionAffichage.afficherCommande();
-
 
 	while (true) {
 		if (gestionAffichage.avoirBesoinQuiter())

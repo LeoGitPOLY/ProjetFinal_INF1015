@@ -62,7 +62,7 @@ void CommandeAllerDirection::execute(Jeu& jeu, vector<string>& commande)
 
 	if (jeu.obtenirCaseDirection(direction) != nullptr) {
 		jeu.allerDansDirection(direction);
-		cout << "Aller " << Case::directionNom_[direction] << "\n" << endl;
+		cout << "Aller " << Case::retournerDescriptionNom()[direction] << "\n" << endl;
 	}
 	else {
 		cout << "Vous ne pouvez pas aller la!\n" << endl;
